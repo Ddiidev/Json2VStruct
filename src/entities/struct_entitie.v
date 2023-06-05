@@ -1,7 +1,7 @@
 module entities
 
-import contracts { Any, Format, IGenerator, IObjStruct, ObjType }
-import genarators.formater
+import contracts { Any, IObjStruct, ObjType }
+import genarator { gen_struct }
 
 pub struct ObjStruct {
 pub mut:
@@ -12,6 +12,6 @@ pub mut:
 	parent   ?&IObjStruct
 }
 
-pub fn (this ObjStruct) builder_format(format Format) IGenerator {
-	return formater.new(this, format)
+pub fn (this ObjStruct) builder_struct() string {
+	return gen_struct(this)
 }

@@ -1,16 +1,8 @@
-module genarators
+module genarator
 
 import contracts { IObjStruct }
 
-pub struct GeneratorJson {
-	obj IObjStruct
-}
-
-pub fn (gen GeneratorJson) execute() string {
-	return gen_struct(gen.obj)
-}
-
-fn gen_struct(obj IObjStruct) string {
+pub fn gen_struct(obj IObjStruct) string {
 	mut struct_str := ''
 	if obj.typ == .object | .root {
 		struct_str = 'struct Root {\n'

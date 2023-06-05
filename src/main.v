@@ -39,5 +39,5 @@ fn main() {
 		]
 	}
 
-	println(e.builder_format(.json).execute())
+	println(e.builder_struct())
 }
