@@ -1,14 +1,16 @@
 module tests
 
-import x.json2
 import entities
+import os
 
-struct Be {
-	name      string
-	age       int
-	is_people bool
-	height    f32
+const json = r'
+{
+	"name": "André",
+	"age": 25,
+	"is_people": true,
+	"height": 1.75
 }
+'
 
 fn test_simple_keys() {
 	mut obj_json := entities.ObjStruct{
@@ -40,10 +42,31 @@ fn test_simple_keys() {
 
 	str_json := obj_json.builder_format(.json).execute()
 
-	obj_analyzed := json2.decode[Be](str_json)!
+	mut file := os.open_append('temp_simple_keys_test.v')!
 
-	assert obj_analyzed.name == 'André'
-	assert obj_analyzed.age == 25
-	assert obj_analyzed.is_people == true
-	assert obj_analyzed.height == 1.75
+	// writer struct
+	file.write_string('import x.json2\n')!
+
+	file.write_string(str_json)!
+
+	file.write_string('\n\n')!
+	file.write_string('const json = r\'${tests.json}\'\n')!
+
+	file.write_string('fn test_temp_simple_keys() {\n')!
+
+	file.write_string('\tmut obj_analyzed := json2.decode[Root](json)!\n')!
+	file.write_string('\tassert obj_analyzed.name == "André"\n')!
+	file.write_string('\tassert obj_analyzed.age == 25\n')!
+	file.write_string('\tassert obj_analyzed.is_people == true\n')!
+	file.write_string('\tassert obj_analyzed.height == 1.75\n')!
+
+	file.write_string('\n}')!
+
+	file.close()
+
+	result := os.execute('v -stats test temp_simple_keys_test.v')
+
+	os.rm('temp_simple_keys_test.v')!
+
+	assert result.exit_code == 0, 'TEST_TMEMP_SIMPLE_KEYS FAILED: ${result.output}\nSTRUCT GEN: ${str_json}'
 }
