@@ -16,7 +16,7 @@ fn gen_struct(obj IObjStruct) string {
 		struct_str = 'struct Root {\n'
 		for i in 0 .. obj.children.len {
 			child := obj.children[i]
-			struct_str += gen_struct(child) + "\n"
+			struct_str += gen_struct(child) + '\n'
 		}
 		struct_str += '}\n'
 	} else if obj.typ == .string {

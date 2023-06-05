@@ -50,8 +50,7 @@ fn test_simple_keys() {
 	file.write_string(str_json)!
 
 	file.write_string('\n\n')!
-	file.write_string('const json = r\'$json\'\n')!
-
+	file.write_string('const json = r\'${tests.json}\'\n')!
 
 	file.write_string('fn test_temp_simple_keys() {\n')!
 
@@ -69,5 +68,5 @@ fn test_simple_keys() {
 
 	os.rm('temp_simple_keys_test.v')!
 
-	assert result.exit_code == 0, 'TEST_TMEMP_SIMPLE_KEYS FAILED: ${result.output}\nSTRUCT GEN: $str_json'
+	assert result.exit_code == 0, 'TEST_TMEMP_SIMPLE_KEYS FAILED: ${result.output}\nSTRUCT GEN: ${str_json}'
 }
