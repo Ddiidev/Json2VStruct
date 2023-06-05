@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="V Run" type="VlangRun" factoryName="VlangRun">
+    <option name="runKind" value="Directory" />
+    <option name="fileName" value="$PROJECT_DIR$/src/main.v" />
+    <option name="directory" value="$PROJECT_DIR$/" />
+    <option name="outputDir" value="$PROJECT_DIR$/bin/debug" />
+    <option name="runAfterBuild" value="true" />
+    <option name="workingDir" value="$PROJECT_DIR$" />
+    <option name="envs" value="" />
+    <option name="buildArguments" value="-o bin\debug\main.exe" />
+    <option name="programArguments" value="" />
+    <option name="production" value="false" />
+    <option name="emulateTerminal" value="false" />
+    <method v="2">
+      <option name="VLANG.BUILD_TASK_PROVIDER" enabled="true" />
+    </method>
+  </configuration>
+</component>

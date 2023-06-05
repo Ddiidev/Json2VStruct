@@ -1,18 +1,17 @@
-module main
+module tests
 
+import x.json2
 import entities
 
-const str_simple_js = r'
-	{
-		"name": "André",
-		"age": 25,
-		"is_people": true,
-		"height": 1.75
-	}
-'
+struct Be {
+	name      string
+	age       int
+	is_people bool
+	height    f32
+}
 
-fn main() {
-	mut e := entities.ObjStruct{
+fn test_simple_keys() {
+	mut obj_json := entities.ObjStruct{
 		name: ''
 		typ: .object | .root
 		children: [
@@ -39,5 +38,12 @@ fn main() {
 		]
 	}
 
-	println(e.builder_format(.json).execute())
+	str_json := obj_json.builder_format(.json).execute()
+
+	obj_analyzed := json2.decode[Be](str_json)!
+
+	assert obj_analyzed.name == 'André'
+	assert obj_analyzed.age == 25
+	assert obj_analyzed.is_people == true
+	assert obj_analyzed.height == 1.75
 }
