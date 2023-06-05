@@ -40,7 +40,7 @@ fn test_simple_keys() {
 		]
 	}
 
-	str_json := obj_json.builder_struct(.json).execute()
+	str_json := obj_json.builder_struct()
 
 	mut file := os.open_append('temp_simple_keys_test.v')!
 
