@@ -1,5 +1,7 @@
 module contracts
 
+import regex
+
 pub interface IObjStruct {
 mut:
 	name string
@@ -7,4 +9,7 @@ mut:
 	children []IObjStruct
 	values []Any
 	parent ?&IObjStruct
+	resolver_name_type() string
+	resolver_name_property() NameKey
 }
+

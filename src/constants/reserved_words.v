@@ -1,6 +1,6 @@
-module main
+module constants
 
-const reserved_words = [
+pub const reserved_words = [
 	'if',
 	'is',
 	'else',
