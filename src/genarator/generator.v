@@ -39,7 +39,6 @@ fn gen_struct(obj_struct IObjStruct, conf IConfig) (string, []IObjStruct) {
 		struct_str += '\t${name_property.name} ${obj.resolver_name_type()} ${attributes}'
 		obj.typ.set(.deferred)
 		late_struct_implementation << obj
-
 	} else if obj.typ == .object | .deferred {
 		struct_str = 'struct ${obj.resolver_name_type()} {\n'
 		for i in 0 .. obj.children.len {

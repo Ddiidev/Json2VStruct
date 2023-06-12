@@ -42,7 +42,7 @@ fn main() {
 			entities.ObjStruct{
 				name: 'type'
 				typ: .string
-				values: ["reserved keyword"]
+				values: ['reserved keyword']
 			},
 			entities.ObjStruct{
 				name: 'height'
@@ -87,8 +87,8 @@ fn main() {
 	}
 
 	println(e.builder_struct(entities.Config{
-		struct_anon: false
-		omit_empty: true
+		struct_anon: true
+		omit_empty: false
 		reserved_word_with_underscore: true
 	}))
 }

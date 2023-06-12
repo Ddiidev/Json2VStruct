@@ -31,7 +31,11 @@ fn test_simple_keys() {
 		]
 	}
 
-	struct_gen := obj_json.builder_struct()
+	struct_gen := obj_json.builder_struct(entities.Config{
+		struct_anon: true
+		omit_empty: false
+		reserved_word_with_underscore: true
+	})
 
 	script := $tmpl('templates/gen_json_simple_keys_test.template')
 
