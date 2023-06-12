@@ -15,6 +15,7 @@ bin/
 .idea/
 .vscode/
 *.iml
+tests/scripts_gen/
 
 # ENV
 .env
