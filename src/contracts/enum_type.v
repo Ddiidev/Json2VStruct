@@ -9,7 +9,6 @@ pub enum ObjType {
 	number
 	boolean
 	null
-
 	// type of control
 	anonymous
 	deferred

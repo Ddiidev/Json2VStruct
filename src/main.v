@@ -47,45 +47,37 @@ fn main() {
 			entities.ObjStruct{
 				name: 'teste subObj'
 				typ: .object
-				children: [
-					entities.ObjStruct{
-						name: 'name'
-						typ: .string
-						values: ['André']
-					},
-					entities.ObjStruct{
-						name: 'age'
-						typ: .number
-						values: [25]
-					}
-				]
-			}
+				children: [entities.ObjStruct{
+					name: 'name'
+					typ: .string
+					values: ['André']
+				}, entities.ObjStruct{
+					name: 'age'
+					typ: .number
+					values: [25]
+				}]
+			},
 			entities.ObjStruct{
 				name: 'childrens'
 				typ: .array | .object
-				children: [
-					entities.ObjStruct{
-						name: 'name'
-						typ: .string
-						values: ['Dante']
-					},
-						entities.ObjStruct{
-						name: 'age'
-						typ: .number
-						values: [1.7]
-					},
-						entities.ObjStruct{
-						name: 'is_people'
-						typ: .boolean
-						values: [true]
-					},
-						entities.ObjStruct{
-						name: 'height'
-						typ: .number
-						values: [0.9]
-					},
-				]
-			}
+				children: [entities.ObjStruct{
+					name: 'name'
+					typ: .string
+					values: ['Dante']
+				}, entities.ObjStruct{
+					name: 'age'
+					typ: .number
+					values: [1.7]
+				}, entities.ObjStruct{
+					name: 'is_people'
+					typ: .boolean
+					values: [true]
+				}, entities.ObjStruct{
+					name: 'height'
+					typ: .number
+					values: [0.9]
+				}]
+			},
 		]
 	}
 

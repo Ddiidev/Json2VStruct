@@ -35,7 +35,8 @@ fn test_simple_keys() {
 
 	script := $tmpl('templates/gen_json_simple_keys_test.template')
 
-	os.write_file('${@VMODROOT}/src/tests/scripts_gen/gen_json_simple_keys_temp_test.v', script)!
+	os.write_file('${@VMODROOT}/src/tests/scripts_gen/gen_json_simple_keys_temp_test.v',
+		script)!
 
 	// result := os.execute('v -stats test gen_json_simple_keys_temp_test.v')
 

@@ -2,7 +2,6 @@ module genarator
 
 import contracts { IObjStruct }
 
-
 pub fn build_struct(obj IObjStruct) string {
 	mut str_struct, deferred_struct := gen_struct(obj)
 
@@ -13,7 +12,6 @@ pub fn build_struct(obj IObjStruct) string {
 
 		str_struct += '\n${temp_str_struct}'
 	}
-
 
 	// println("\n############################################################################\n")
 	return str_struct
@@ -34,16 +32,13 @@ fn gen_struct(obj_struct IObjStruct) (string, []IObjStruct) {
 			late_struct_implementation << deferred_struct
 		}
 		struct_str += '}\n'
-
 	} else if obj.typ == .object {
 		name_property := obj.resolver_name_property()
 
 		dump(name_property)
-
 		struct_str += '\t${name_property.name} ${obj.resolver_name_type()}'
 		obj.typ.set(.deferred)
 		late_struct_implementation << obj
-
 	} else if obj.typ == .object | .deferred {
 		struct_str = 'struct ${obj.resolver_name_type()} {\n'
 		for i in 0 .. obj.children.len {
@@ -54,7 +49,6 @@ fn gen_struct(obj_struct IObjStruct) (string, []IObjStruct) {
 		}
 		struct_str += '}\n'
 		return struct_str, late_struct_implementation
-
 	} else if obj.typ == .object | .anonymous {
 		struct_str = 'struct {\n'
 		for i in 0 .. obj.children.len {
@@ -64,7 +58,6 @@ fn gen_struct(obj_struct IObjStruct) (string, []IObjStruct) {
 			struct_str += struct_str_temp + '\n'
 		}
 		struct_str += '}\n'
-
 	} else if obj.typ == .object | .array {
 		mut struct_str_local := '\t${obj.name} []struct {\n'
 		for i in 0 .. obj.children.len {
@@ -75,7 +68,6 @@ fn gen_struct(obj_struct IObjStruct) (string, []IObjStruct) {
 			late_struct_implementation << deferred_struct
 		}
 		struct_str_local += '\t}\n'
-
 	} else if obj.typ == .string {
 		struct_str += '\t${obj.name} string'
 	} else if obj.typ == .number {
