@@ -37,10 +37,4 @@ fn test_simple_keys() {
 
 	os.write_file('${@VMODROOT}/src/tests/scripts_gen/gen_json_simple_keys_temp_test.v',
 		script)!
-
-	// result := os.execute('v -stats test gen_json_simple_keys_temp_test.v')
-
-	// os.rm('gen_json_simple_keys_temp_test.v')!
-
-	// assert result.exit_code == 0, 'GEN_JSON_SIMPLE_KEYS_TEMP_TEST.v FAILED: ${result.output}\nSTRUCT GEN: ${struct_gen}'
 }

@@ -46,10 +46,13 @@ pub fn (this ObjStruct) resolver_name_property(conf IConfig) INameKey {
 	final_name = if final_name[0] == `_` {
 		final_name[1..]
 	} else {
-		final_name[0..1] + final_name[1..]
+		final_name
 	}
 	mut re := regex.regex_opt(r'[^a-zA-Z0-9_]') or { return NameKey{this.name, ''} }
-	final_name = re.replace(final_name, '').replace(r'_{2,}', '_')
+	final_name = re.replace(final_name, '')
+
+	re = regex.regex_opt(r'_{2,}') or { return NameKey{final_name, ''} }
+	final_name = re.replace(final_name, r'_')
 
 	current_reserved_word := constants.reserved_words.contains(final_name)
 
@@ -77,17 +80,15 @@ pub fn (this ObjStruct) resolver_name_property(conf IConfig) INameKey {
 	return NameKey{final_name, replace_name}
 }
 
-fn (this NameKey) construct_attribute(attrib string) string {
+pub fn (this NameKey) construct_attribute(conf IConfig) string {
 	mut attribs := []string{}
-	if attrib == '' {
+	if this.attribute_replace_name == '' {
 		attribs = []
 	} else {
-		attribs = [attrib]
+		attribs = [this.attribute_replace_name]
 	}
 
-	flag_omit_empty := true // Substitua por false se FlagOmitEmpty for falso (Temporário)
-
-	if flag_omit_empty {
+	if conf.omit_empty {
 		attribs << 'omitempty'
 	}
 

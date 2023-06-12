@@ -34,11 +34,12 @@ fn gen_struct(obj_struct IObjStruct, conf IConfig) (string, []IObjStruct) {
 		struct_str += '}\n'
 	} else if obj.typ == .object {
 		name_property := obj.resolver_name_property(conf)
+		attributes := name_property.construct_attribute(conf)
 
-		dump(name_property)
-		struct_str += '\t${name_property.name} ${obj.resolver_name_type()}'
+		struct_str += '\t${name_property.name} ${obj.resolver_name_type()} ${attributes}'
 		obj.typ.set(.deferred)
 		late_struct_implementation << obj
+
 	} else if obj.typ == .object | .deferred {
 		struct_str = 'struct ${obj.resolver_name_type()} {\n'
 		for i in 0 .. obj.children.len {
@@ -69,15 +70,30 @@ fn gen_struct(obj_struct IObjStruct, conf IConfig) (string, []IObjStruct) {
 		}
 		struct_str_local += '\t}\n'
 	} else if obj.typ == .string {
-		struct_str += '\t${obj.name} string'
+		name_property := obj.resolver_name_property(conf)
+		attributes := name_property.construct_attribute(conf)
+
+		struct_str += '\t${name_property.name} string ${attributes}'
 	} else if obj.typ == .number {
-		struct_str += '\t${obj.name} f32'
+		name_property := obj.resolver_name_property(conf)
+		attributes := name_property.construct_attribute(conf)
+
+		struct_str += '\t${name_property.name} f32 ${attributes}'
 	} else if obj.typ == .boolean {
-		struct_str += '\t${obj.name} bool'
+		name_property := obj.resolver_name_property(conf)
+		attributes := name_property.construct_attribute(conf)
+
+		struct_str += '\t${name_property.name} bool ${attributes}'
 	} else if obj.typ == .array {
-		struct_str += '\t${obj.name} []'
+		name_property := obj.resolver_name_property(conf)
+		attributes := name_property.construct_attribute(conf)
+
+		struct_str += '\t${name_property.name} []string ${attributes}'
 	} else if obj.typ == .null {
-		struct_str += '\t${obj.name} ?Any'
+		name_property := obj.resolver_name_property(conf)
+		attributes := name_property.construct_attribute(conf)
+
+		struct_str += '\t${name_property.name} ?string ${attributes}'
 	}
 
 	// println("\n>> @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n")
