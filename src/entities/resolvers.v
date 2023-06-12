@@ -56,22 +56,14 @@ pub fn (this ObjStruct) resolver_name_property(conf IConfig) INameKey {
 
 	current_reserved_word := constants.reserved_words.contains(final_name)
 
-	flag_reserved_words_with_at := true // is temporary
-
-	if current_reserved_word && flag_reserved_words_with_at {
+	if current_reserved_word && !conf.reserved_word_with_underscore {
 		final_name = '@${final_name}'
 	} else if current_reserved_word {
 		final_name = '${final_name}_'
 	}
 
-	/*
-	const replaceName = final_name !== name && !(currentReservedWord && FlagReserverdWordsWithAt) ? `json: "${name}"` : '';
-
-	   return { name: final_name, replaceName: replaceName };
-	**/
-
 	replace_name := if final_name != this.name && !(current_reserved_word
-		&& flag_reserved_words_with_at) {
+		&& !conf.reserved_word_with_underscore) {
 		'json: "${this.name}"'
 	} else {
 		''

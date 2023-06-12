@@ -40,6 +40,11 @@ fn main() {
 				values: [true]
 			},
 			entities.ObjStruct{
+				name: 'type'
+				typ: .string
+				values: ["reserved keyword"]
+			},
+			entities.ObjStruct{
 				name: 'height'
 				typ: .number
 				values: [1.75]
