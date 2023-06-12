@@ -1,7 +1,7 @@
 module entities
 
 import constants
-import contracts { INameKey, IConfig }
+import contracts { IConfig, INameKey }
 import genarator { build_struct }
 import regex
 
@@ -68,7 +68,7 @@ pub fn (this ObjStruct) resolver_name_property(conf IConfig) INameKey {
 	**/
 
 	replace_name := if final_name != this.name && !(current_reserved_word
-	&& flag_reserved_words_with_at) {
+		&& flag_reserved_words_with_at) {
 		'json: "${this.name}"'
 	} else {
 		''
@@ -76,7 +76,6 @@ pub fn (this ObjStruct) resolver_name_property(conf IConfig) INameKey {
 
 	return NameKey{final_name, replace_name}
 }
-
 
 fn (this NameKey) construct_attribute(attrib string) string {
 	mut attribs := []string{}
@@ -94,7 +93,7 @@ fn (this NameKey) construct_attribute(attrib string) string {
 
 	return match attribs.len {
 		0 { '' }
-		1 { '[${attribs.join("")}]' }
-		else { '[${attribs.join("; ")}]' }
+		1 { '[${attribs.join('')}]' }
+		else { '[${attribs.join('; ')}]' }
 	}
 }

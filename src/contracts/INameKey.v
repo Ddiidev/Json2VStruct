@@ -2,6 +2,6 @@ module contracts
 
 pub interface INameKey {
 mut:
-	name                   string
+	name string
 	attribute_replace_name string
 }
