@@ -1,4 +1,4 @@
-module contracts
+module entities
 
 pub struct NameKey {
 pub mut:

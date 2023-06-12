@@ -81,5 +81,9 @@ fn main() {
 		]
 	}
 
-	println(e.builder_struct())
+	println(e.builder_struct(entities.Config{
+		struct_anon: false
+		omit_empty: true
+		reserved_word_with_underscore: true
+	}))
 }
