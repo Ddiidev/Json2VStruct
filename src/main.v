@@ -24,44 +24,44 @@ fn main() {
 		name: ''
 		typ: .object | .root
 		children: [
-			entities.ObjStruct{
-				name: 'name'
-				typ: .string
-				values: ['André']
-			},
-			entities.ObjStruct{
-				name: 'age'
-				typ: .number
-				values: [25]
-			},
-			entities.ObjStruct{
-				name: 'is_people'
-				typ: .boolean
-				values: [true]
-			},
-			entities.ObjStruct{
-				name: 'type'
-				typ: .string
-				values: ['reserved keyword']
-			},
-			entities.ObjStruct{
-				name: 'height'
-				typ: .number
-				values: [1.75]
-			},
-			entities.ObjStruct{
-				name: 'teste subObj'
-				typ: .object
-				children: [entities.ObjStruct{
-					name: 'name'
-					typ: .string
-					values: ['André']
-				}, entities.ObjStruct{
-					name: 'age'
-					typ: .number
-					values: [25]
-				}]
-			},
+			// entities.ObjStruct{
+			// 	name: 'name'
+			// 	typ: .string
+			// 	values: ['André']
+			// },
+			// entities.ObjStruct{
+			// 	name: 'age'
+			// 	typ: .number
+			// 	values: [25]
+			// },
+			// entities.ObjStruct{
+			// 	name: 'is_people'
+			// 	typ: .boolean
+			// 	values: [true]
+			// },
+			// entities.ObjStruct{
+			// 	name: 'type'
+			// 	typ: .string
+			// 	values: ['reserved keyword']
+			// },
+			// entities.ObjStruct{
+			// 	name: 'height'
+			// 	typ: .number
+			// 	values: [1.75]
+			// },
+			// entities.ObjStruct{
+			// 	name: 'teste subObj'
+			// 	typ: .object
+			// 	children: [entities.ObjStruct{
+			// 		name: 'name'
+			// 		typ: .string
+			// 		values: ['André']
+			// 	}, entities.ObjStruct{
+			// 		name: 'age'
+			// 		typ: .number
+			// 		values: [25]
+			// 	}]
+			// },
 			entities.ObjStruct{
 				name: 'childrens'
 				typ: .array | .object
@@ -87,7 +87,7 @@ fn main() {
 	}
 
 	println(e.builder_struct(entities.Config{
-		struct_anon: true
+		struct_anon: false
 		omit_empty: false
 		reserved_word_with_underscore: true
 	}))

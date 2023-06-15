@@ -9,7 +9,7 @@ pub fn (this ObjStruct) builder_struct(conf IConfig) string {
 	return build_struct(this, conf)
 }
 
-pub fn (this ObjStruct) resolver_name_type() string {
+fn (this ObjStruct) resolver_name_type() string {
 	mut final_name := ''
 	mut is_upper := false
 
@@ -33,7 +33,7 @@ pub fn (this ObjStruct) resolver_name_type() string {
 	return final_name
 }
 
-pub fn (this ObjStruct) resolver_name_property(conf IConfig) INameKey {
+fn (this ObjStruct) resolver_name_property(conf IConfig) INameKey {
 	mut final_name := ''
 	for chr in this.name {
 		if chr.ascii_str() == chr.ascii_str().to_upper() && !chr.is_digit() {
@@ -72,7 +72,7 @@ pub fn (this ObjStruct) resolver_name_property(conf IConfig) INameKey {
 	return NameKey{final_name, replace_name}
 }
 
-pub fn (this NameKey) construct_attribute(conf IConfig) string {
+fn (this NameKey) construct_attribute(conf IConfig) string {
 	mut attribs := []string{}
 	if this.attribute_replace_name == '' {
 		attribs = []

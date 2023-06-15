@@ -56,6 +56,7 @@ fn gen_struct(obj_struct IObjStruct, conf IConfig) (string, []IObjStruct) {
 		}
 		struct_str += '}\n'
 		return struct_str, late_struct_implementation
+
 	} else if obj.typ == .object | .anonymous {
 		struct_str = 'struct {\n'
 		for i in 0 .. obj.children.len {
@@ -65,16 +66,16 @@ fn gen_struct(obj_struct IObjStruct, conf IConfig) (string, []IObjStruct) {
 			struct_str += struct_str_temp + '\n'
 		}
 		struct_str += '}\n'
+
 	} else if obj.typ == .object | .array {
-		// mut struct_str_local := '\t${obj.name} []struct {\n'
-		// for i in 0 .. obj.children.len {
-		// 	child := obj.children[i]
-		// 	struct_str_temp, deferred_struct := gen_struct(child, conf)
-		//
-		// 	struct_str_local += '\t${struct_str_temp}\n'
-		// 	late_struct_implementation << deferred_struct
-		// }
-		// struct_str_local += '\t}\n'
+		obj.typ = .object
+		_, defer_code := gen_struct(obj, conf)
+
+		name_property := obj.resolver_name_property(conf)
+		attributes := name_property.construct_attribute(conf)
+		struct_str += '\t${name_property.name} []${obj.resolver_name_type()} ${attributes}'
+		late_struct_implementation << defer_code
+
 	} else if obj.typ == .string {
 		name_property := obj.resolver_name_property(conf)
 		attributes := name_property.construct_attribute(conf)
@@ -101,12 +102,6 @@ fn gen_struct(obj_struct IObjStruct, conf IConfig) (string, []IObjStruct) {
 
 		struct_str += '\t${name_property.name} ?string ${attributes}'
 	}
-
-	// println("\n>> @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n")
-	// dump(obj)
-	// println("\n-------------------------------------------------------------------------------\n")
-	// dump(late_struct_implementation)
-	// println("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ <<\n")
 
 	return struct_str, late_struct_implementation
 }
