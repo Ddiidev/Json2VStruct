@@ -53,4 +53,4 @@ jobs:
         run: v -cc tcc -stats test ~/.
 
       - name: Execute Tests in generated code
-        run: v -cc tcc -stats test ~/.
+        run: v -cc tcc -stats test ~/tests/scripts_gen
