@@ -49,5 +49,8 @@ jobs:
       - name: V doctor
         run: v doctor
 
-      - name: Execute Tests
+      - name: Execute Tests for create code
         run: v -cc tcc -stats test ~/.
+
+      - name: Execute Tests in generated code
+        run: v -cc tcc -stats test ~/tests/scripts_gen

@@ -1,6 +1,7 @@
 module genarator
 
 import contracts { IConfig, IObjStruct }
+import helper
 
 pub fn build_struct(obj IObjStruct, conf IConfig) string {
 	mut str_struct, deferred_struct := gen_struct(obj, conf)
@@ -56,7 +57,6 @@ fn gen_struct(obj_struct IObjStruct, conf IConfig) (string, []IObjStruct) {
 		}
 		struct_str += '}\n'
 		return struct_str, late_struct_implementation
-
 	} else if obj.typ == .object | .anonymous {
 		struct_str = 'struct {\n'
 		for i in 0 .. obj.children.len {
@@ -66,7 +66,6 @@ fn gen_struct(obj_struct IObjStruct, conf IConfig) (string, []IObjStruct) {
 			struct_str += struct_str_temp + '\n'
 		}
 		struct_str += '}\n'
-
 	} else if obj.typ == .object | .array {
 		obj.typ = .object
 		_, defer_code := gen_struct(obj, conf)
@@ -75,7 +74,15 @@ fn gen_struct(obj_struct IObjStruct, conf IConfig) (string, []IObjStruct) {
 		attributes := name_property.construct_attribute(conf)
 		struct_str += '\t${name_property.name} []${obj.resolver_name_type()} ${attributes}'
 		late_struct_implementation << defer_code
+	} else if obj.typ.has(.array) && obj.typ.has(.string | .number | .bool) {
+		name_property := obj.resolver_name_property(conf)
+		attributes := name_property.construct_attribute(conf)
 
+		name_type := helper.get_names_enum_setad[contracts.ObjType](
+			type_enum: obj.typ
+		).filter(it !in ['array', 'number'])[0]
+
+		struct_str += '\t${name_property.name} []${name_type} ${attributes}'
 	} else if obj.typ == .string {
 		name_property := obj.resolver_name_property(conf)
 		attributes := name_property.construct_attribute(conf)
@@ -86,7 +93,7 @@ fn gen_struct(obj_struct IObjStruct, conf IConfig) (string, []IObjStruct) {
 		attributes := name_property.construct_attribute(conf)
 
 		struct_str += '\t${name_property.name} f32 ${attributes}'
-	} else if obj.typ == .boolean {
+	} else if obj.typ == .bool {
 		name_property := obj.resolver_name_property(conf)
 		attributes := name_property.construct_attribute(conf)
 

@@ -1,6 +1,6 @@
 module scripts_gen
 
-import x.json2
+import json
 
 // Struct to be generated
 @struct_gen
@@ -13,7 +13,7 @@ const json = r'
 '
 
 fn test_simple_keys() {
-	mut obj_analyzed := json2.decode[Root](json)!
+	mut obj_analyzed := json.decode(Root, json)!
 
 	assert obj_analyzed.my_name == "André"
 	assert obj_analyzed.my_age == 25

@@ -7,7 +7,9 @@ pub enum ObjType {
 	array
 	string
 	number
-	boolean
+	int
+	f32
+	bool
 	null
 	// type of control
 	anonymous

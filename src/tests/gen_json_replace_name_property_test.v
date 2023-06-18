@@ -3,7 +3,7 @@ module tests
 import entities
 import os
 
-fn test_simple_keys() {
+pub fn test_replace_name_property() ! {
 	mut obj_json := entities.ObjStruct{
 		name: ''
 		typ: .object | .root
@@ -17,7 +17,7 @@ fn test_simple_keys() {
 				name: 'my age'
 				typ: .number
 				values: [25]
-			}
+			},
 		]
 	}
 

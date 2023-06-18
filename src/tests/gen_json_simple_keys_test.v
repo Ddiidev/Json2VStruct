@@ -3,7 +3,7 @@ module tests
 import entities
 import os
 
-fn test_simple_keys() {
+pub fn test_simple_keys() ! {
 	mut obj_json := entities.ObjStruct{
 		name: ''
 		typ: .object | .root
@@ -20,7 +20,7 @@ fn test_simple_keys() {
 			},
 			entities.ObjStruct{
 				name: 'is_people'
-				typ: .boolean
+				typ: .bool
 				values: [true]
 			},
 			entities.ObjStruct{
@@ -37,7 +37,7 @@ fn test_simple_keys() {
 		reserved_word_with_underscore: true
 	})
 
-	script := $tmpl('templates/gen_json_simple_keys_test.template')
+	script := $tmpl('../tests/templates/gen_json_simple_keys_test.template')
 
 	os.write_file('${@VMODROOT}/src/tests/scripts_gen/gen_json_simple_keys_temp_test.v',
 		script)!
