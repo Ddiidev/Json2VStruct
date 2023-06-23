@@ -3,6 +3,7 @@ module parsers
 import entities { Config, ObjStruct }
 import x.json2
 import contracts { ObjType }
+import helper
 
 fn parser_json(object_json_str string, conf Config) !string {
 	mut struct_obj_json := ObjStruct{}
@@ -40,7 +41,7 @@ fn resolver_key_value(obj_json json2.Any, mut struct_obj_json ObjStruct) {
 }
 
 fn resolver_array(obj_json json2.Any, mut struct_obj_json ObjStruct) {
-	current_type := ObjType.array
+	mut current_type := ObjType.array
 
 	for item in obj_json.arr() {
 		for key, value in item.as_map() {
@@ -59,13 +60,21 @@ fn resolver_array(obj_json json2.Any, mut struct_obj_json ObjStruct) {
 				resolver_key_value(value, mut children)
 				struct_obj_json.children << children
 			} else {
-				t := resolver_type(value)
+				curr_item  := resolver_type(value)
+				current_type.set(curr_item)
+
 				struct_obj_json.children << ObjStruct{
-					typ: t
+					typ: curr_item
 					value: contracts.Any(value.str())
 				}
 			}
 		}
+	}
+
+	struct_obj_json.typ = if helper.get_names_enum_setad(type_enum: current_type).len > 2 {
+		ObjType.array | ObjType.any
+	} else {
+		current_type
 	}
 }
 

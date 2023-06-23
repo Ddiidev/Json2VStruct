@@ -11,6 +11,7 @@ pub enum ObjType {
 	f32
 	bool
 	null
+	any
 	// type of control
 	anonymous
 	deferred
