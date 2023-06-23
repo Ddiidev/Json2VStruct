@@ -11,12 +11,12 @@ pub fn test_replace_name_property() ! {
 			entities.ObjStruct{
 				name: 'my name'
 				typ: .string
-				values: ['André']
+				value: 'André'
 			},
 			entities.ObjStruct{
 				name: 'my age'
 				typ: .number
-				values: [25]
+				value: 25
 			},
 		]
 	}

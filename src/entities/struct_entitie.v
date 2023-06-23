@@ -7,6 +7,5 @@ pub mut:
 	name     string
 	typ      ObjType
 	children []IObjStruct
-	values   []Any
-	parent   ?&IObjStruct
+	value    Any
 }

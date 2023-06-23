@@ -11,22 +11,22 @@ pub fn test_simple_keys() ! {
 			entities.ObjStruct{
 				name: 'name'
 				typ: .string
-				values: ['André']
+				value: 'André'
 			},
 			entities.ObjStruct{
 				name: 'age'
 				typ: .number
-				values: [25]
+				value: 25
 			},
 			entities.ObjStruct{
 				name: 'is_people'
 				typ: .bool
-				values: [true]
+				value: true
 			},
 			entities.ObjStruct{
 				name: 'height'
 				typ: .number
-				values: [1.75]
+				value: 1.75
 			},
 		]
 	}

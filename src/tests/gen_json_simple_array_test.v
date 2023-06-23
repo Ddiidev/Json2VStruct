@@ -15,17 +15,17 @@ pub fn test_simple_array() ! {
 					entities.ObjStruct{
 						name: ''
 						typ: .string
-						values: ['Dante']
+						value: 'Dante'
 					},
 					entities.ObjStruct{
 						name: ''
 						typ: .string
-						values: ['André']
+						value: 'André'
 					},
 					entities.ObjStruct{
 						name: ''
 						typ: .string
-						values: ['Milca']
+						value: 'Milca'
 					},
 				]
 			},
@@ -36,17 +36,17 @@ pub fn test_simple_array() ! {
 					entities.ObjStruct{
 						name: ''
 						typ: .number
-						values: [0]
+						value: 0
 					},
 					entities.ObjStruct{
 						name: ''
 						typ: .number
-						values: [1]
+						value: 1
 					},
 					entities.ObjStruct{
 						name: ''
 						typ: .number
-						values: [2]
+						value: 2
 					},
 				]
 			},
@@ -57,17 +57,17 @@ pub fn test_simple_array() ! {
 					entities.ObjStruct{
 						name: ''
 						typ: .number
-						values: [0]
+						value: 0
 					},
 					entities.ObjStruct{
 						name: ''
 						typ: .number
-						values: [1]
+						value: 1
 					},
 					entities.ObjStruct{
 						name: ''
 						typ: .number
-						values: [2]
+						value: 2
 					},
 				]
 			},
@@ -78,17 +78,17 @@ pub fn test_simple_array() ! {
 					entities.ObjStruct{
 						name: ''
 						typ: .bool
-						values: [true]
+						value: true
 					},
 					entities.ObjStruct{
 						name: ''
 						typ: .bool
-						values: [false]
+						value: false
 					},
 					entities.ObjStruct{
 						name: ''
 						typ: .bool
-						values: [true]
+						value: true
 					},
 				]
 			},
