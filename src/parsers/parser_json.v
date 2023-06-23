@@ -60,7 +60,7 @@ fn resolver_array(obj_json json2.Any, mut struct_obj_json ObjStruct) {
 				resolver_key_value(value, mut children)
 				struct_obj_json.children << children
 			} else {
-				curr_item  := resolver_type(value)
+				curr_item := resolver_type(value)
 				current_type.set(curr_item)
 
 				struct_obj_json.children << ObjStruct{
