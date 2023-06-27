@@ -100,7 +100,9 @@ fn gen_struct(obj_struct IObjStruct, conf IConfig) !(string, []IObjStruct) {
 
 		name_type := helper.get_names_enum_setad[contracts.ObjType](
 			type_enum: obj.typ
-		).filter(it != 'number')[0] or { return error('not found type number. "${name_property.name}" is of numeric type -> ${obj.typ} <-') }
+		).filter(it != 'number')[0] or {
+			return error('not found type number. "${name_property.name}" is of numeric type -> ${obj.typ} <-')
+		}
 
 		struct_str += '\t${name_property.name} ${name_type} ${attributes}'
 	} else if obj.typ == .bool {

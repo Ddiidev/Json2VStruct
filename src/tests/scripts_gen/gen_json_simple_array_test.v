@@ -4,12 +4,11 @@ import json
 
 // Struct to be generated
 struct Root {
-	childrens_str []string 
-	childrens_int []int 
-	childrens_f32 []f32 
-	childrens_bool []bool 
+	childrens_str  []string
+	childrens_int  []int
+	childrens_f32  []f32
+	childrens_bool []bool
 }
-
 
 const json = r'
 {
@@ -21,15 +20,15 @@ const json = r'
 '
 
 fn test_simple_keys() {
-	mut obj_analyzed := json.decode(Root, json)!
+	mut obj_analyzed := json.decode(Root, scripts_gen.json)!
 
-    assert obj_analyzed.childrens_int.len == 3
-    assert obj_analyzed.childrens_f32.len == 3
-    assert obj_analyzed.childrens_str.len == 3
-    assert obj_analyzed.childrens_bool.len == 3
+	assert obj_analyzed.childrens_int.len == 3
+	assert obj_analyzed.childrens_f32.len == 3
+	assert obj_analyzed.childrens_str.len == 3
+	assert obj_analyzed.childrens_bool.len == 3
 
-    assert obj_analyzed.childrens_int[0] == 0
-    assert obj_analyzed.childrens_f32[0] == 0.1
-    assert obj_analyzed.childrens_str[0] == "André"
-    assert obj_analyzed.childrens_bool[0] == true
+	assert obj_analyzed.childrens_int[0] == 0
+	assert obj_analyzed.childrens_f32[0] == 0.1
+	assert obj_analyzed.childrens_str[0] == 'André'
+	assert obj_analyzed.childrens_bool[0] == true
 }
