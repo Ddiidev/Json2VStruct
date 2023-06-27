@@ -78,7 +78,6 @@ fn resolver_array(obj_json json2.Any, mut struct_obj_json ObjStruct) {
 	} else {
 		current_type
 	}
-
 }
 
 fn resolver_type(value json2.Any) ObjType {

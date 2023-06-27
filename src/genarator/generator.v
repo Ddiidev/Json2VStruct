@@ -40,7 +40,6 @@ fn gen_struct(obj_struct IObjStruct, conf IConfig) (string, []IObjStruct) {
 		} else {
 			struct_str += '\t${name_property.name} ${obj.resolver_name_type()} ${attributes}'
 			obj.typ.set(.deferred)
-
 			late_struct_implementation << obj
 		}
 	} else if obj.typ == .object | .deferred {
@@ -65,11 +64,21 @@ fn gen_struct(obj_struct IObjStruct, conf IConfig) (string, []IObjStruct) {
 		struct_str += '}\n'
 	} else if obj.typ == .object | .array {
 		obj.typ = .object
-		_, defer_code := gen_struct(obj, conf)
+		if conf.struct_anon {
+			obj.typ.set(.anonymous)
+		}
+		temp_struct_str, defer_code := gen_struct(obj, conf)
+
+		type_name_or_struct := if conf.struct_anon {
+			temp_struct_str.replace('\n', '\n\t').trim_right('\n\t')
+		} else {
+			obj.resolver_name_type()
+		}
 
 		name_property := obj.resolver_name_property(conf)
 		attributes := name_property.construct_attribute(conf)
-		struct_str += '\t${name_property.name} []${obj.resolver_name_type()} ${attributes}'
+		struct_str += '\t${name_property.name} []${type_name_or_struct} ${attributes}'
+
 		late_struct_implementation << defer_code
 	} else if obj.typ.has(.array) && obj.typ.has(.string | .number | .bool) {
 		name_property := obj.resolver_name_property(conf)
@@ -91,9 +100,9 @@ fn gen_struct(obj_struct IObjStruct, conf IConfig) (string, []IObjStruct) {
 
 		name_type := helper.get_names_enum_setad[contracts.ObjType](
 			type_enum: obj.typ
-		).filter(it !in ['number'])[0]
+		).filter(it != 'number')[0]
 
-		struct_str += '\t${name_property.name} $name_type ${attributes}'
+		struct_str += '\t${name_property.name} ${name_type} ${attributes}'
 	} else if obj.typ == .bool {
 		name_property := obj.resolver_name_property(conf)
 		attributes := name_property.construct_attribute(conf)
