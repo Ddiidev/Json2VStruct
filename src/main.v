@@ -25,9 +25,11 @@ const str_simple_js = r'
 '
 
 fn main() {
-	parsers.parser(.json, str_simple_js, entities.Config{
+	str_struct := parsers.parser(.json, str_simple_js, entities.Config{
 		struct_anon: false
 		omit_empty: false
 		reserved_word_with_underscore: true
 	})!
+
+	print(str_struct)
 }

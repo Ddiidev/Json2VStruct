@@ -43,7 +43,7 @@ fn (this ObjStruct) resolver_name_property(conf IConfig) INameKey {
 		}
 	}
 
-	final_name = if final_name[0] == `_` {
+	final_name = if final_name.len > 0 && final_name[0] == `_` {
 		final_name[1..]
 	} else {
 		final_name

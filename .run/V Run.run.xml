@@ -7,7 +7,7 @@
     <option name="runAfterBuild" value="true" />
     <option name="workingDir" value="$PROJECT_DIR$" />
     <option name="envs" value="" />
-    <option name="buildArguments" value="-o bin\debug\main.exe" />
+    <option name="buildArguments" value="" />
     <option name="programArguments" value="" />
     <option name="production" value="false" />
     <option name="emulateTerminal" value="false" />
