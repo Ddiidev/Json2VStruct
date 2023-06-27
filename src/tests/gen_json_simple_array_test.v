@@ -99,7 +99,7 @@ pub fn test_simple_array() ! {
 		struct_anon: true
 		omit_empty: false
 		reserved_word_with_underscore: true
-	})
+	})!
 
 	script := $tmpl('templates/gen_json_simple_array.template')
 

@@ -8,7 +8,7 @@ import helper
 fn parser_json(object_json_str string, conf Config) !string {
 	mut struct_obj_json := ObjStruct{}
 
-	obj_json := json2.raw_decode(object_json_str) or { return err }
+	obj_json := json2.raw_decode(object_json_str)!
 
 	if obj_json !is []json2.Any {
 		struct_obj_json.typ = .object | .root
@@ -19,7 +19,7 @@ fn parser_json(object_json_str string, conf Config) !string {
 
 	// dump(struct_obj_json)
 	// return ''
-	return struct_obj_json.builder_struct(conf)
+	return struct_obj_json.builder_struct(conf)!
 }
 
 fn resolver_key_value(obj_json json2.Any, mut struct_obj_json ObjStruct) {

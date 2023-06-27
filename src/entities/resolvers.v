@@ -5,8 +5,8 @@ import contracts { IConfig, INameKey }
 import genarator { build_struct }
 import regex
 
-pub fn (this ObjStruct) builder_struct(conf IConfig) string {
-	return build_struct(this, conf)
+pub fn (this ObjStruct) builder_struct(conf IConfig) !string {
+	return build_struct(this, conf)!
 }
 
 fn (this ObjStruct) resolver_name_type() string {

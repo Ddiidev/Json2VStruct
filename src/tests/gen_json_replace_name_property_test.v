@@ -15,7 +15,7 @@ pub fn test_replace_name_property() ! {
 			},
 			entities.ObjStruct{
 				name: 'my age'
-				typ: .number
+				typ: .number | .int
 				value: 25
 			},
 		]
@@ -25,7 +25,7 @@ pub fn test_replace_name_property() ! {
 		struct_anon: false
 		omit_empty: false
 		reserved_word_with_underscore: false
-	})
+	})!
 
 	script := $tmpl('templates/gen_json_replace_name_property.template')
 

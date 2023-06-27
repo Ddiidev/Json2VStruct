@@ -15,7 +15,7 @@ pub fn test_simple_keys() ! {
 			},
 			entities.ObjStruct{
 				name: 'age'
-				typ: .number
+				typ: .number | .int
 				value: 25
 			},
 			entities.ObjStruct{
@@ -25,7 +25,7 @@ pub fn test_simple_keys() ! {
 			},
 			entities.ObjStruct{
 				name: 'height'
-				typ: .number
+				typ: .number | .f32
 				value: 1.75
 			},
 		]
@@ -35,7 +35,7 @@ pub fn test_simple_keys() ! {
 		struct_anon: true
 		omit_empty: false
 		reserved_word_with_underscore: true
-	})
+	})!
 
 	script := $tmpl('../tests/templates/gen_json_simple_keys_test.template')
 
