@@ -96,7 +96,7 @@ pub fn test_simple_array() ! {
 	}
 
 	struct_gen := obj_json.builder_struct(entities.Config{
-		struct_anon: true
+		struct_anon: false
 		omit_empty: false
 		reserved_word_with_underscore: true
 	})!
