@@ -22,12 +22,12 @@ pub fn test_replace_name_property() ! {
 						name: 'name'
 						typ: .string
 						value: 'Uno'
-					}
+					},
 					entities.ObjStruct{
 						name: 'speed'
 						typ: .number | .f32
 						value: 'Uno'
-					}
+					},
 				]
 			},
 		]
@@ -41,6 +41,5 @@ pub fn test_replace_name_property() ! {
 
 	script := $tmpl('templates/gen_json_subobj.template')
 
-	os.write_file('${@VMODROOT}/src/tests/scripts_gen/gen_json_subobj_temp_test.v',
-		script)!
+	os.write_file('${@VMODROOT}/src/tests/scripts_gen/gen_json_subobj_temp_test.v', script)!
 }

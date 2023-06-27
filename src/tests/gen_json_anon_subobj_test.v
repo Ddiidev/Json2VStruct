@@ -22,12 +22,12 @@ pub fn test_replace_name_property() ! {
 						name: 'name'
 						typ: .string
 						value: 'Uno'
-					}
+					},
 					entities.ObjStruct{
 						name: 'speed'
 						typ: .number | .f32
 						value: 'Uno'
-					}
+					},
 				]
 			},
 		]
