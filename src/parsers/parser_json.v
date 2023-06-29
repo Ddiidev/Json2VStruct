@@ -5,7 +5,7 @@ import x.json2
 import contracts { ObjType }
 import helper
 
-fn parser_json(object_json_str string, conf Config) !string {
+fn parser_json(object_json_str string, conf Config) !ObjStruct {
 	mut struct_obj_json := ObjStruct{}
 
 	obj_json := json2.raw_decode(object_json_str)!
@@ -19,7 +19,7 @@ fn parser_json(object_json_str string, conf Config) !string {
 
 	// dump(struct_obj_json)
 	// return ''
-	return struct_obj_json.builder_struct(conf)!
+	return struct_obj_json
 }
 
 fn resolver_key_value(obj_json json2.Any, mut struct_obj_json ObjStruct) {
@@ -35,7 +35,7 @@ fn resolver_key_value(obj_json json2.Any, mut struct_obj_json ObjStruct) {
 			struct_obj_json.children << ObjStruct{
 				name: key
 				typ: resolver_type(value)
-				value: contracts.Any(value.str())
+				value: resolver_value_type(value)
 			}
 		}
 	}
@@ -67,7 +67,7 @@ fn resolver_array(obj_json json2.Any, mut struct_obj_json ObjStruct) {
 				struct_obj_json.children << ObjStruct{
 					name: key
 					typ: curr_item
-					value: contracts.Any(value.str())
+					value: resolver_value_type(value)
 				}
 			}
 		}
@@ -93,4 +93,16 @@ fn resolver_type(value json2.Any) ObjType {
 		return .array
 	}
 	return .string
+}
+
+fn resolver_value_type(value json2.Any) contracts.Any {
+	return if value is bool {
+		value
+	} else if value is f64 {
+		value
+	} else if value is i64 {
+		int(value)
+	} else {
+		value.str()
+	}
 }

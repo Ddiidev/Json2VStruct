@@ -2,7 +2,6 @@ module tests
 
 import entities
 import os
-import contracts
 
 pub fn test_replace_name_property() ! {
 	mut obj_json := entities.ObjStruct{
@@ -41,6 +40,5 @@ pub fn test_replace_name_property() ! {
 
 	script := $tmpl('templates/gen_json_anon_subobj.template')
 
-	os.write_file('${@VMODROOT}/src/tests/scripts_gen/gen_json_anon_subobj_temp_test.v',
-		script)!
+	os.write_file('${@VMODROOT}/src/tests/scripts_gen/json_anon_subobj_temp_test.v', script)!
 }

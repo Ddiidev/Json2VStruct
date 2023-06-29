@@ -29,6 +29,6 @@ pub fn test_replace_name_property() ! {
 
 	script := $tmpl('templates/gen_json_replace_name_property.template')
 
-	os.write_file('${@VMODROOT}/src/tests/scripts_gen/gen_json_replace_name_property_temp_test.v',
+	os.write_file('${@VMODROOT}/src/tests/scripts_gen/json_replace_name_property_temp_test.v',
 		script)!
 }

@@ -103,5 +103,5 @@ pub fn test_simple_array() ! {
 
 	script := $tmpl('templates/gen_json_simple_array.template')
 
-	os.write_file('${@VMODROOT}/src/tests/scripts_gen/gen_json_simple_array_test.v', script)!
+	os.write_file('${@VMODROOT}/src/tests/scripts_gen/json_simple_array_test.v', script)!
 }
