@@ -36,10 +36,11 @@ fn (this ObjStruct) resolver_name_type() string {
 fn (this ObjStruct) resolver_name_property(conf IConfig) INameKey {
 	mut final_name := ''
 	for chr in this.name {
-		if chr.ascii_str() == chr.ascii_str().to_upper() && !chr.is_digit() {
-			final_name += '_${chr.ascii_str().to_lower()}'
+		chr_ascii := chr.ascii_str()
+		if chr_ascii == chr_ascii.to_upper() && !chr.is_digit() {
+			final_name += '_${chr_ascii.to_lower()}'
 		} else {
-			final_name += chr.ascii_str().to_lower()
+			final_name += chr_ascii.to_lower()
 		}
 	}
 
@@ -64,7 +65,7 @@ fn (this ObjStruct) resolver_name_property(conf IConfig) INameKey {
 
 	replace_name := if final_name != this.name && !(current_reserved_word
 		&& !conf.reserved_word_with_underscore) {
-		'json: "${this.name}"'
+		'${conf.type_parser}: "${this.name}"'
 	} else {
 		''
 	}

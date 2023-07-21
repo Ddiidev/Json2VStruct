@@ -1,11 +1,11 @@
-module parsers
+module module_parser_json
 
-import entities { Config, ObjStruct }
+import entities { ObjStruct }
+import contracts { IConfig, ObjType }
 import x.json2
-import contracts { ObjType }
 import helper
 
-fn parser_json(object_json_str string, conf Config) !ObjStruct {
+pub fn parser(object_json_str string, conf IConfig) !ObjStruct {
 	mut struct_obj_json := ObjStruct{}
 
 	obj_json := json2.raw_decode(object_json_str)!
