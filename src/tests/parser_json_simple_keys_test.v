@@ -1,7 +1,7 @@
 module tests
 
 import parsers
-import entities { Config }
+import entities.configuration { Config }
 import contracts { Any }
 
 const s_json = r'
@@ -14,10 +14,11 @@ const s_json = r'
 '
 
 fn test_simple_keys() {
-	builded_struct := parsers.parser_build_struct(.json, tests.s_json, Config{
+	builded_struct := parsers.parser_build_struct(tests.s_json, Config{
 		struct_anon: false
 		omit_empty: false
 		reserved_word_with_underscore: false
+		type_parser: .json
 	})!
 
 	assert builded_struct.typ == .object | .root

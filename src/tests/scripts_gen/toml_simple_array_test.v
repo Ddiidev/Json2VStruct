@@ -1,6 +1,6 @@
 module scripts_gen
 
-import json
+import toml
 
 // Struct to be generated
 struct Root {
@@ -12,16 +12,14 @@ struct Root {
 
 
 const str_object = r'
-	{
-		"childrens_str": ["André", "Milca", "Dante"],
-		"childrens_int": [0,1,2],
-		"childrens_f32": [0.1,1.1,2.1],
-		"childrens_bool": [true, false, true]
-	}
+	childrens_str = [ "André", "Milca", "Dante" ]
+	childrens_int = [ 0, 1, 2 ]
+	childrens_f32 = [ 0.1, 1.1, 2.1 ]
+	childrens_bool = [ true, false, true ]
 	'
 
 fn test_simple_keys() {
-	mut obj_analyzed := json.decode(Root, str_object)!
+	mut obj_analyzed := toml.parse_text(str_object)!.reflect[Root]()
 
     assert obj_analyzed.childrens_int.len == 3
     assert obj_analyzed.childrens_f32.len == 3

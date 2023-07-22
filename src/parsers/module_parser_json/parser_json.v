@@ -17,8 +17,6 @@ pub fn parser(object_json_str string, conf IConfig) !ObjStruct {
 		resolver_array(obj_json, mut struct_obj_json)
 	}
 
-	// dump(struct_obj_json)
-	// return ''
 	return struct_obj_json
 }
 
@@ -31,13 +29,23 @@ fn resolver_key_value(obj_json json2.Any, mut struct_obj_json ObjStruct) {
 			}
 			resolver_array(value, mut children)
 			struct_obj_json.children << children
+		} else if value is map[string]json2.Any {
+			mut children := ObjStruct{
+				name: key
+				typ: .object
+			}
+			resolver_key_value(value, mut children)
+			struct_obj_json.children << children
 		} else {
 			struct_obj_json.children << ObjStruct{
 				name: key
 				typ: resolver_type(value)
 				value: resolver_value_type(value)
 			}
+
+			dump(struct_obj_json.children)
 		}
+		// dump(struct_obj_json)
 	}
 }
 

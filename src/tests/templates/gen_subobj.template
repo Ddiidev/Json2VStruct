@@ -1,0 +1,15 @@
+module scripts_gen
+
+@imports
+
+// Struct to be generated
+@struct_gen
+
+const str_object = r'@str_object'
+
+fn test_simple_keys() {
+	@line_code_method_parser
+
+    assert obj_analyzed.my_name == "André"
+    assert obj_analyzed.nums.len == 3
+}

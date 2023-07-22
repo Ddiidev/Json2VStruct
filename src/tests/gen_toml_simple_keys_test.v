@@ -5,7 +5,7 @@ import entities
 import os
 
 pub fn test_simple_keys() ! {
-	mut obj_json := entities.ObjStruct{
+	mut obj_struct := entities.ObjStruct{
 		name: ''
 		typ: .object | .root
 		children: [
@@ -32,26 +32,25 @@ pub fn test_simple_keys() ! {
 		]
 	}
 
-	imports := 'import json'
+	imports := 'import toml'
 
 	str_object := r'
-	{
-		"name": "André",
-		"age": 25,
-		"is_people": true,
-		"height": 1.75
-	}
+	name = "André"
+	age = 25
+	is_people = true
+	height = 1.75
 	'
 
-	line_code_method_parser := 'mut obj_analyzed := json.decode(Root, str_object)!'
-	struct_gen := obj_json.builder_struct(Config{
+	line_code_method_parser := 'mut obj_analyzed := toml.parse_text(str_object)!.reflect[Root]()'
+
+	struct_gen := obj_struct.builder_struct(Config{
 		struct_anon: false
 		omit_empty: false
 		reserved_word_with_underscore: true
-		type_parser: .json
+		type_parser: .toml
 	})!
 
 	script := $tmpl('templates/gen_simple_keys_test.template')
 
-	os.write_file('${@VMODROOT}/src/tests/scripts_gen/json_simple_keys_temp_test.v', script)!
+	os.write_file('${@VMODROOT}/src/tests/scripts_gen/toml_simple_keys_temp_test.v', script)!
 }

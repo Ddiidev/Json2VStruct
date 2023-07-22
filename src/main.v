@@ -6,43 +6,6 @@ import parsers
 import os
 import cli
 
-// const str_simple_js = r'[1,2,3]'
-
-// const str_simple_js = r'
-// 	{
-// 		"name": "André",
-// 		"age": 25,
-// 		"is_people": true,
-// 		"height": 1.75,
-// 		"childrens": [
-// 			{
-// 				"name": "Dante",
-// 				"age": 1.8,
-// 				"is_people": true,
-// 				"height": 0.9,
-// 				"x": {"então":1}
-// 			}
-// 		],
-// 		"type": [0,1,2]
-// 	}
-// '
-
-const str_obj_simple = r'
-name = "André"
-age = 25
-is_people = true
-height = 1.75
-
-[[childrens]]
-name = "Dante"
-age = 1.8
-is_people = true
-height = 0.9
-
-  [childrens.x]
-  "então" = 1
-'
-
 fn main() {
 	mut app := cli.Command{
 		name: 'V2Struct'
@@ -96,12 +59,17 @@ fn main() {
 }
 
 fn create_struct(cmd cli.Command) ! {
-	type_parser := match cmd.flags.get_string('type')! {
+	mut data := cmd.args.join('')
+	if data.len_utf8() == 0 {
+		data = os.get_raw_stdin().bytestr()
+	}
+
+	mut type_parser := match cmd.flags.get_string('type')! {
 		'toml' { TypeParser.toml }
 		else { TypeParser.json }
 	}
 
-	builded_struct := parsers.parser(str_obj_simple, Config{
+	built_structure := parsers.parser(data, Config{
 		struct_anon: cmd.flags.get_bool('struct-anon') or { false }
 		omit_empty: cmd.flags.get_bool('omit_empty') or { false }
 		reserved_word_with_underscore: cmd.flags.get_bool('reserved_word_with_underscore') or {
@@ -110,5 +78,5 @@ fn create_struct(cmd cli.Command) ! {
 		type_parser: type_parser
 	})!
 
-	print(builded_struct)
+	print(built_structure)
 }

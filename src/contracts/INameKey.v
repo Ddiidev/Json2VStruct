@@ -1,8 +1,8 @@
 module contracts
 
 pub interface INameKey {
-	construct_attribute(conf IConfig) string
+	resolver_attribute(conf IConfig) INameKey
 mut:
 	name string
-	attribute_replace_name string
+	attributes string
 }

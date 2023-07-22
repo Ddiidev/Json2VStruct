@@ -73,12 +73,12 @@ fn (this ObjStruct) resolver_name_property(conf IConfig) INameKey {
 	return NameKey{final_name, replace_name}
 }
 
-fn (this NameKey) construct_attribute(conf IConfig) string {
+fn (this NameKey) resolver_attribute(conf IConfig) INameKey {
 	mut attribs := []string{}
-	if this.attribute_replace_name == '' {
+	if this.attributes == '' {
 		attribs = []
 	} else {
-		attribs = [this.attribute_replace_name]
+		attribs = [this.attributes]
 	}
 
 	if conf.omit_empty {
@@ -86,8 +86,14 @@ fn (this NameKey) construct_attribute(conf IConfig) string {
 	}
 
 	return match attribs.len {
-		0 { '' }
-		1 { '[${attribs.join('')}]' }
-		else { '[${attribs.join('; ')}]' }
+		0 {
+			NameKey{this.name, ''}
+		}
+		1 {
+			NameKey{this.name, '[${attribs.join('')}]'}
+		}
+		else {
+			NameKey{this.name, '[${attribs.join('; ')}]'}
+		}
 	}
 }

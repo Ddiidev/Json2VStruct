@@ -96,26 +96,24 @@ pub fn test_simple_array() ! {
 		]
 	}
 
-	imports := 'import json'
+	imports := 'import toml'
 
 	str_object := r'
-	{
-		"childrens_str": ["André", "Milca", "Dante"],
-		"childrens_int": [0,1,2],
-		"childrens_f32": [0.1,1.1,2.1],
-		"childrens_bool": [true, false, true]
-	}
+	childrens_str = [ "André", "Milca", "Dante" ]
+	childrens_int = [ 0, 1, 2 ]
+	childrens_f32 = [ 0.1, 1.1, 2.1 ]
+	childrens_bool = [ true, false, true ]
 	'
 
-	line_code_method_parser := 'mut obj_analyzed := json.decode(Root, str_object)!'
+	line_code_method_parser := 'mut obj_analyzed := toml.parse_text(str_object)!.reflect[Root]()'
 	struct_gen := obj_json.builder_struct(Config{
 		struct_anon: false
 		omit_empty: false
 		reserved_word_with_underscore: true
-		type_parser: .json
+		type_parser: .toml
 	})!
 
 	script := $tmpl('templates/gen_simple_array.template')
 
-	os.write_file('${@VMODROOT}/src/tests/scripts_gen/json_simple_array_test.v', script)!
+	os.write_file('${@VMODROOT}/src/tests/scripts_gen/toml_simple_array_test.v', script)!
 }

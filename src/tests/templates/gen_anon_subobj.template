@@ -1,28 +1,14 @@
 module scripts_gen
 
-import json
+@imports
 
 // Struct to be generated
 @struct_gen
 
-const json = r'
-{
-    "my name": "André",
-	"cars": [
-	    {
-            "name": "Fiesta",
-            "speed": 3.3
-        },
-        {
-            "name": "Focus",
-            "speed": 5
-        }
-	]
-}
-'
+const str_object = r'@str_object'
 
 fn test_simple_keys() {
-	mut obj_analyzed := json.decode(Root, json)!
+	@line_code_method_parser
 
     assert obj_analyzed.my_name == "André"
     assert obj_analyzed.cars[0].name == "Fiesta"

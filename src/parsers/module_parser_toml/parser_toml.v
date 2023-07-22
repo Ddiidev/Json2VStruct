@@ -2,7 +2,6 @@ module module_parser_toml
 
 import entities { ObjStruct }
 import contracts { IConfig, ObjType }
-// import parsers.resolvers { resolver_type, resolver_value_type }
 import toml
 import helper
 
@@ -14,6 +13,8 @@ pub fn parser(object_toml_str string, conf IConfig) !ObjStruct {
 	if obj_toml !is []toml.Any {
 		struct_obj_toml.typ = .object | .root
 		resolver_key_value(obj_toml, mut struct_obj_toml)
+	} else {
+		resolver_array(obj_toml, mut struct_obj_toml)
 	}
 
 	return struct_obj_toml
@@ -27,6 +28,13 @@ fn resolver_key_value(obj_toml toml.Any, mut struct_obj_json ObjStruct) {
 				typ: .array
 			}
 			resolver_array(value, mut children)
+			struct_obj_json.children << children
+		} else if value is map[string]toml.Any {
+			mut children := ObjStruct{
+				name: key
+				typ: .object
+			}
+			resolver_key_value(value, mut children)
 			struct_obj_json.children << children
 		} else {
 			struct_obj_json.children << ObjStruct{
@@ -100,6 +108,6 @@ fn resolver_value_type(value toml.Any) contracts.Any {
 	} else if value is i64 {
 		int(value)
 	} else {
-		value.str()
+		value.string()
 	}
 }
