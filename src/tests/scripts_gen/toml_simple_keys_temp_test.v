@@ -4,12 +4,11 @@ import toml
 
 // Struct to be generated
 struct Root {
-	name string 
-	age int 
-	is_people bool 
-	height f32 
+	name      string
+	age       int
+	is_people bool
+	height    f32
 }
-
 
 const str_object = r'
 	name = "André"
@@ -19,9 +18,9 @@ const str_object = r'
 	'
 
 fn test_simple_keys() {
-    mut obj_analyzed := toml.parse_text(str_object)!.reflect[Root]()
+	mut obj_analyzed := toml.parse_text(scripts_gen.str_object)!.reflect[Root]()
 
-	assert obj_analyzed.name == "André"
+	assert obj_analyzed.name == 'André'
 	assert obj_analyzed.age == 25
 	assert obj_analyzed.is_people == true
 	assert obj_analyzed.height == 1.75

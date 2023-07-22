@@ -2,11 +2,11 @@ module scripts_gen
 
 import toml
 // Struct to be generated
-struct Root {
-	my_name string [toml: "my name"]
-	my_age int [toml: "my age"]
-}
 
+struct Root {
+	my_name string [toml: 'my name']
+	my_age  int    [toml: 'my age']
+}
 
 const str_object = r'
 	"my name" = "André"
@@ -14,8 +14,8 @@ const str_object = r'
 	'
 
 fn test_simple_keys() {
-	mut obj_analyzed := toml.parse_text(str_object)!.reflect[Root]()
+	mut obj_analyzed := toml.parse_text(scripts_gen.str_object)!.reflect[Root]()
 
-	assert obj_analyzed.my_name == "André"
+	assert obj_analyzed.my_name == 'André'
 	assert obj_analyzed.my_age == 25
 }

@@ -4,12 +4,11 @@ import toml
 
 // Struct to be generated
 struct Root {
-	childrens_str []string 
-	childrens_int []int 
-	childrens_f32 []f32 
-	childrens_bool []bool 
+	childrens_str  []string
+	childrens_int  []int
+	childrens_f32  []f32
+	childrens_bool []bool
 }
-
 
 const str_object = r'
 	childrens_str = [ "André", "Milca", "Dante" ]
@@ -19,15 +18,15 @@ const str_object = r'
 	'
 
 fn test_simple_keys() {
-	mut obj_analyzed := toml.parse_text(str_object)!.reflect[Root]()
+	mut obj_analyzed := toml.parse_text(scripts_gen.str_object)!.reflect[Root]()
 
-    assert obj_analyzed.childrens_int.len == 3
-    assert obj_analyzed.childrens_f32.len == 3
-    assert obj_analyzed.childrens_str.len == 3
-    assert obj_analyzed.childrens_bool.len == 3
+	assert obj_analyzed.childrens_int.len == 3
+	assert obj_analyzed.childrens_f32.len == 3
+	assert obj_analyzed.childrens_str.len == 3
+	assert obj_analyzed.childrens_bool.len == 3
 
-    assert obj_analyzed.childrens_int[0] == 0
-    assert obj_analyzed.childrens_f32[0] == 0.1
-    assert obj_analyzed.childrens_str[0] == "André"
-    assert obj_analyzed.childrens_bool[0] == true
+	assert obj_analyzed.childrens_int[0] == 0
+	assert obj_analyzed.childrens_f32[0] == 0.1
+	assert obj_analyzed.childrens_str[0] == 'André'
+	assert obj_analyzed.childrens_bool[0] == true
 }
