@@ -8,15 +8,17 @@ import cli
 
 fn main() {
 	mut app := cli.Command{
-		name: 'V2Struct'
+		name: 'obj2V'
 		disable_man: true
 		disable_help: true
-		description: 'Translate a json, yaml or toml to a struct in vlang'
+		version: '0.0.2'
+		usage: '[args/stdin]'
+		sort_flags: true
+		description: r'Translate a json and toml to a struct vlang'
 		commands: [
 			cli.Command{
 				name: 'help'
-				description: 'Ajuda sobre a ferramenta'
-				version: '0.0.2'
+				description: 'Help about the tool'
 				execute: fn (cmd cli.Command) ! {
 					cli.print_help_for_command(cmd)!
 				}

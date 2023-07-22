@@ -42,10 +42,7 @@ fn resolver_key_value(obj_json json2.Any, mut struct_obj_json ObjStruct) {
 				typ: resolver_type(value)
 				value: resolver_value_type(value)
 			}
-
-			dump(struct_obj_json.children)
 		}
-		// dump(struct_obj_json)
 	}
 }
 

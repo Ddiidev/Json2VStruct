@@ -3,8 +3,6 @@ module genarator
 import contracts { IConfig, IObjStruct }
 
 pub fn build_struct(obj IObjStruct, conf IConfig) !string {
-	// dump(obj)
-	// return ''
 	mut str_from_struct, postponed_assemblies := gen_struct(obj, conf)!
 
 	for current_deferred_assembly in postponed_assemblies {

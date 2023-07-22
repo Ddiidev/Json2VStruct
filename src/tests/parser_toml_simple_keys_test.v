@@ -19,15 +19,13 @@ fn test_simple_keys() {
 		type_parser: .toml
 	})!
 
-	dump(builded_struct)
-	// assert builded_struct.typ == .object | .root
-	// assert builded_struct.children.len == 4
-	// assert builded_struct.children[0].name == 'name'
-	// println( builded_struct.children[0].value.str())
-	// assert builded_struct.children[1].name == 'age'
-	// assert builded_struct.children[1].value == Any(25)
-	// assert builded_struct.children[2].name == 'is_people'
-	// assert builded_struct.children[2].value == Any(true)
-	// assert builded_struct.children[3].name == 'height'
-	// assert builded_struct.children[3].value == Any(1.75)
+	assert builded_struct.typ == .object | .root
+	assert builded_struct.children.len == 4
+	assert builded_struct.children[0].name == 'name'
+	assert builded_struct.children[1].name == 'age'
+	assert builded_struct.children[1].value == contracts.Any(25)
+	assert builded_struct.children[2].name == 'is_people'
+	assert builded_struct.children[2].value == contracts.Any(true)
+	assert builded_struct.children[3].name == 'height'
+	assert builded_struct.children[3].value == contracts.Any(1.75)
 }
